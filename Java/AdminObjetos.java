@@ -119,7 +119,7 @@ public class AdminObjetos {
     public int buscarPosicion( String nombre ) {
         int pos = -1;
         for (int i=0; i < lista.length; i++) {
-            if (lista[i].getNombre().equals(nombre)) {
+            if (lista[i].getNombre().toLowerCase().equals(nombre.toLowerCase())) {
                 pos = i;
             }
         }
@@ -140,7 +140,7 @@ public class AdminObjetos {
         // return objetoEncontrado;
 
         for ( int i=0; i < lista.length; i++ ) {
-            if ( lista[i].getNombre().equals(nombre) ) {
+            if ( lista[i].getNombre().toLowerCase().equals(nombre.toLowerCase()) ) {
                 return lista[i];
             }
         }

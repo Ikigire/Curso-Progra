@@ -15,7 +15,7 @@ public class interfaz {
 
         System.out.println("Posición del objeto: " + administrador.buscarPosicion("Objeto No. 2"));
 
-        Objetos objeto = administrador.buscarObjeto("Objeto No. 2");
+        Objetos objeto = administrador.buscarObjeto("objeto No. 2");
         System.out.println("\n\n\tDatos del objeto:" +
                            "\n\t\tNombre: " + objeto.getNombre() +
                            "\n\t\tTipo: " + objeto.getTipo());
