@@ -24,9 +24,9 @@ public class AdminObjetos {
      */
     public boolean agregar(){
         try{
-            this.lista2.add(new Objetos());
+            //this.lista2.add(new Objetos());
             
-            this.lista[0] = new Objetos();
+            //this.lista[0] = new Objetos();
         }
         catch( Exception e ){
             return false;
@@ -39,10 +39,15 @@ public class AdminObjetos {
         return true;
     }
 
-    /*
-     * Método para agrgar elementos dentro de las listas
+    /**
+     * Método para agregar una nueva tasa a la lista
+     * @param nombre Nombre de la tasa
+     * @param tipo Es el tipo de elemento
+     * @param material Indica el tipo de material de construcción de la tasa
+     * @param size Indicador del tamao de la tasa "Pequeña", "Mediana", "Grande"
+     * @return True si se ha agregado a la lista correctamente | False en cualquier otro caso
      */
-    public boolean agregar( String nombre, String tipo ) {
+    public boolean agregar( String nombre, String tipo, String material, String size ) {
         try{
             //this.lista2.add(new Objetos("ArrayList: " + nombre, tipo));
             // Opción del ciclo For
@@ -65,7 +70,7 @@ public class AdminObjetos {
             }
             
             //Opción de la variable de control
-            this.lista[this.contador] = new Objetos(nombre, tipo);
+            this.lista[this.contador] = new Tasa(nombre, tipo, material, size);
             this.contador++;
         }
         catch( Exception e ){
@@ -75,6 +80,32 @@ public class AdminObjetos {
                                 lista.length + 
                                 "\n\tElementos de la lista2: " + 
                                 lista2.size());
+        }
+        return true;
+    }
+
+    /**
+     * Método para agregar cualquier tipo de objeto a la lista
+     * @param objeto Objeto a ser almacenado
+     * @return True en caso de guardar el objeto con éxito| False en cualquier otro caso
+     */
+    public boolean agregar( Objetos objeto ) {
+        try {
+            if ( this.contador >= this.lista.length ) {
+                //Incrementar la capacidad del arreglo
+                Objetos remplazo[] = new Objetos [this.contador+1];
+                for ( int i = 0; i<lista.length; i++ ) {
+                    remplazo[i] = lista[i];
+                }
+
+                this.lista = null;
+                this.lista = remplazo;
+            }
+
+            this.lista[this.contador] = objeto;
+            this.contador++;
+        } catch (Exception e) {
+            return false;
         }
         return true;
     }
@@ -146,5 +177,62 @@ public class AdminObjetos {
         }
 
         return null;
+    }
+
+    /**
+     * Método para eliminar un objeto de la lista
+     * @param posicion posición del elemento que será eliminado
+     * @return True si fue correcta la eliminación, False en cualquier otro caso
+     */
+    public boolean eliminarObjeto( int posicion ) {
+        try {
+            Objetos auxiliar[] = new Objetos[contador-1];
+            for ( int i=0; i < contador-1; i++ ) {
+                if ( i < posicion ) 
+                    auxiliar[i] = lista[i];
+                
+                else 
+                    auxiliar[i] = lista[i+1];
+                
+            }
+            
+            lista = null;
+            lista = auxiliar;
+            contador--;
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Método para eliminar un elemento de la lista por el nombre del objeto (Primera coincidencia)
+     * @param nombre Nombre del objeto que será buscado (Sencible a Mayusculas y minusculas)
+     * @return True en caso de eliminación exitosa, False en cualquier otro caso
+     */
+    public boolean eliminarObjeto( String nombre ) {
+        try {
+            int posicion = this.buscarPosicion(nombre);
+            if ( posicion > -1 ){
+                Objetos auxiliar[] = new Objetos[contador-1];
+                for ( int i=0; i < contador-1; i++ ) {
+                    if ( i < posicion ) 
+                        auxiliar[i] = lista[i];
+                    
+                    else 
+                        auxiliar[i] = lista[i+1];
+                    
+                }
+                
+                lista = null;
+                lista = auxiliar;
+                contador--;
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e) {
+            return false;
+        }
     }
 }

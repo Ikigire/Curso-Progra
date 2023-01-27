@@ -13,11 +13,20 @@ public class interfaz {
 
         administrador.consultaGeneral();
 
-        System.out.println("Posición del objeto: " + administrador.buscarPosicion("Objeto No. 2"));
+        int posicion = administrador.buscarPosicion("Objeto No. 2");
+        System.out.println("Posición del objeto: " + posicion);
 
         Objetos objeto = administrador.buscarObjeto("objeto No. 2");
         System.out.println("\n\n\tDatos del objeto:" +
                            "\n\t\tNombre: " + objeto.getNombre() +
                            "\n\t\tTipo: " + objeto.getTipo());
+
+        administrador.eliminarObjeto(posicion);
+
+        administrador.consultaGeneral();
+
+        administrador.eliminarObjeto("objeto no. 4");
+
+        administrador.consultaGeneral();
     }
 }
